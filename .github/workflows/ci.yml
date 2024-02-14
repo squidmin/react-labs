@@ -72,5 +72,5 @@ jobs:
             --region=us-central1 \
             --platform=managed \
             --quiet \
-            --no-allow-unauthenticated \
+            --allow-unauthenticated \
             --verbosity=debug
