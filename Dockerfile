@@ -17,5 +17,14 @@ RUN npm run build
 # Use Nginx to serve the app
 FROM nginx:stable-alpine
 COPY --from=build /app/build /usr/share/nginx/html
-EXPOSE 80
+
+# Remove the default Nginx configuration file
+RUN rm /etc/nginx/conf.d/default.conf
+
+# Copy the custom Nginx configuration template
+COPY default.conf.template /etc/nginx/templates/default.conf.template
+
+# Expose port 8080 (Cloud Run will set the PORT environment variable to 8080)
+EXPOSE 8080
+
 CMD ["nginx", "-g", "daemon off;"]
