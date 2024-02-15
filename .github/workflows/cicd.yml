@@ -72,7 +72,7 @@ jobs:
       - name: Deploy to Cloud Run (CLI)
         run: |
           gcloud run deploy react-labs \
-            --image=${{ needs.setup-and-test.outputs.image }} \
+            --image=us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/react-labs-test/react-labs:latest \
             --project=${{ secrets.GCP_PROJECT_ID }} \
             --service-account=gh-actions-pipeline@${{ secrets.GCP_PROJECT_ID }}.iam.gserviceaccount.com \
             --region=us-central1 \
