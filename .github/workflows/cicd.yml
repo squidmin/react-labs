@@ -11,8 +11,6 @@ jobs:
     strategy:
       matrix:
         node-version: [18.x]
-    outputs:
-      image: us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/react-labs-test/react-labs:latest
     steps:
       - uses: actions/checkout@v2
 
@@ -26,6 +24,10 @@ jobs:
 
       - name: Run tests
         run: npm test
+
+      - name: Set output
+        id: set_output
+        run: echo "::set-output name=image::us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/react-labs-test/react-labs:latest"
 
   setup-gcloud:
     name: Setup gcloud
@@ -56,8 +58,8 @@ jobs:
 
       - name: Build and Push Docker image to Google Artifact Registry
         run: |
-          docker build -t us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/react-labs-test/react-labs:latest .
-          docker push us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/react-labs-test/react-labs:latest
+          docker build -t ${{ needs.setup-and-test.outputs.image }} .
+          docker push ${{ needs.setup-and-test.outputs.image }}
 
   deploy:
     name: Deploy to Cloud Run
@@ -72,7 +74,7 @@ jobs:
       - name: Deploy to Cloud Run (CLI)
         run: |
           gcloud run deploy react-labs \
-            --image=us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/react-labs-test/react-labs:latest \
+            --image=${{ needs.setup-and-test.outputs.image }} \
             --project=${{ secrets.GCP_PROJECT_ID }} \
             --service-account=gh-actions-pipeline@${{ secrets.GCP_PROJECT_ID }}.iam.gserviceaccount.com \
             --region=us-central1 \
