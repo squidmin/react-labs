@@ -7,9 +7,6 @@ function App() {
   return (
       <div className={`App ${theme}`}>
         <header>
-          <p>
-            XML to JSON Converter
-          </p>
           <button onClick={toggleTheme}>Toggle Theme</button>
         </header>
         <XmlToJsonConverter/>
