@@ -1,5 +1,7 @@
 # Getting Started with Create React App
 
+[![Build and Deploy to Google Cloud Run](https://github.com/squidmin/react-labs/actions/workflows/ci.yml/badge.svg)](https://github.com/squidmin/react-labs/actions/workflows/ci.yml)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
