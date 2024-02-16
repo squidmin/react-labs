@@ -14,3 +14,10 @@
   color: var(--text-color);
   padding: 20px;
 }
+
+.App-header {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 1rem;
+}
