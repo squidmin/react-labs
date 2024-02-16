@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# react-labs
 
 [![Build and Deploy to Google Cloud Run](https://github.com/squidmin/react-labs/actions/workflows/cicd.yml/badge.svg)](https://github.com/squidmin/react-labs/actions/workflows/cicd.yml)
 
